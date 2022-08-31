@@ -9,18 +9,18 @@ const { logErrors, boomErrorHandler, generalErrorHandler } = require('./utils/mi
 
 app.use(express.json());
 
-//const whitelist = ['http://localhost:3000', 'https://algoritmia.upiitadigital.com/'];
-// const options = {
-//     origin: (origin, callback) => {
-//         if(whitelist.includes(origin) || !origin){
-//             callback(null, true);
-//         }else{
-//             callback(new Error('Access denied'));
-//         }
-//     }
-// }
-//app.use(cors(options));
-app.use(cors());
+const whitelist = ['http://localhost:3000', 'https://algoritmia.upiitadigital.com/'];
+const options = {
+    origin: (origin, callback) => {
+        if(whitelist.includes(origin) || !origin){
+            callback(null, true);
+        }else{
+            callback(new Error('Access denied'));
+        }
+    }
+}
+app.use(cors(options));
+
 
 generalRoutes(app);
 mongoConnect();
