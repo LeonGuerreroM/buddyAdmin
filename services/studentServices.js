@@ -5,7 +5,11 @@ class StudentServices{
     constructor(){}
 
     async create(body){
-        const element = new studentModel(body);
+        const newBody = {
+            ...body,
+            role: 'student' 
+        }
+        const element = new studentModel(newBody);
         const newElement = await element.save();
         return newElement;
     }
